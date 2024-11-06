@@ -2,6 +2,8 @@ let clickCount = 0;
 const maxClicks = 730;
 const counterButton = document.getElementById("counterButton");
 const photoGallery = document.getElementById("photoGallery");
+const viewMemoriesButton = document.getElementById("viewMemoriesButton");
+const slideshow = document.getElementById("slideshow");
 
 // Create falling hearts
 function createFallingHeart() {
@@ -27,6 +29,13 @@ counterButton.addEventListener("click", () => {
 
     if (clickCount >= maxClicks) {
         counterButton.classList.add("hidden");
-        photoGallery.style.visibility = "visible";
+        photoGallery.classList.add("visible");
+        viewMemoriesButton.classList.remove("hidden");
     }
+});
+
+// Show slideshow on "View the Memories" button click
+viewMemoriesButton.addEventListener("click", () => {
+    viewMemoriesButton.classList.add("hidden");
+    slideshow.classList.remove("hidden");
 });
