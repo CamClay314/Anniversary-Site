@@ -119,3 +119,19 @@ body {
         opacity: 0;
     }
 }
+
+/* New styles for the autoclick button */
+#autoClickButton {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    font-size: 18px;
+    border: none;
+    border-radius: 10px;
+    background-color: #ff69b4;
+    color: #fff;
+    cursor: pointer;
+    z-index: 1;
+    animation: button-pop 0.5s ease;
+}
