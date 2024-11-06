@@ -147,8 +147,9 @@ body {
 }
 
 #frog {
-    position: absolute;
-    font-size: 2em;
+    position: fixed;
+    width: 60px;
+    height: auto;
     cursor: pointer;
     z-index: 2;
 }

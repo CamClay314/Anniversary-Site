@@ -33,18 +33,37 @@ function updateHeartRate() {
 let heartGenerator = setInterval(createFallingHeart, heartInterval);
 
 function showFrog() {
-    frog.style.left = Math.random() * 90 + "vw";
-    frog.style.top = Math.random() * 80 + "vh";
+    const edge = Math.floor(Math.random() * 4);
     frog.classList.remove("hidden");
+
+    switch (edge) {
+        case 0:
+            frog.style.left = "0";
+            frog.style.top = Math.random() * 100 + "vh";
+            break;
+        case 1:
+            frog.style.right = "0";
+            frog.style.top = Math.random() * 100 + "vh";
+            break;
+        case 2:
+            frog.style.top = "0";
+            frog.style.left = Math.random() * 100 + "vw";
+            break;
+        case 3:
+            frog.style.bottom = "0";
+            frog.style.left = Math.random() * 100 + "vw";
+            break;
+    }
+
     setTimeout(() => frog.classList.add("hidden"), 5000);
 }
 
 function startFrogTimer() {
     setInterval(() => {
-        if (Math.random() < 0.2) {
+        if (Math.random() < 0.3) {
             showFrog();
         }
-    }, 10000);
+    }, 15000);
 }
 
 startFrogTimer();
@@ -96,4 +115,3 @@ frog.addEventListener("click", () => {
 viewMemoriesButton.addEventListener("click", () => {
     viewMemoriesButton.classList.add("hidden");
     slideshow.classList.remove("hidden");
-});
