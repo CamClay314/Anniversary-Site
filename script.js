@@ -1,13 +1,15 @@
 let clickCount = 0;
 const maxClicks = 730;
 const halfwayPoint = 360;
+let heartInterval = 500;
 const counterButton = document.getElementById("counterButton");
 const photoGallery = document.getElementById("photoGallery");
 const viewMemoriesButton = document.getElementById("viewMemoriesButton");
 const slideshow = document.getElementById("slideshow");
 const autoClickButton = document.getElementById("autoClickButton");
+const frog = document.getElementById("frog");
+const secretLink = document.getElementById("secretLink");
 
-// Create falling hearts
 function createFallingHeart() {
     const heart = document.createElement("div");
     heart.classList.add("falling-heart");
@@ -22,12 +24,35 @@ function createFallingHeart() {
     }, 8000);
 }
 
-setInterval(createFallingHeart, 500);
+function updateHeartRate() {
+    clearInterval(heartGenerator);
+    heartInterval = Math.max(100, heartInterval - 10);
+    heartGenerator = setInterval(createFallingHeart, heartInterval);
+}
 
-// Button click event
+let heartGenerator = setInterval(createFallingHeart, heartInterval);
+
+function showFrog() {
+    frog.style.left = Math.random() * 90 + "vw";
+    frog.style.top = Math.random() * 80 + "vh";
+    frog.classList.remove("hidden");
+    setTimeout(() => frog.classList.add("hidden"), 5000);
+}
+
+function startFrogTimer() {
+    setInterval(() => {
+        if (Math.random() < 0.2) {
+            showFrog();
+        }
+    }, 10000);
+}
+
+startFrogTimer();
+
 counterButton.addEventListener("click", () => {
     clickCount++;
     counterButton.innerText = `Day ${clickCount}`;
+    updateHeartRate();
 
     if (clickCount === halfwayPoint) {
         autoClickButton.classList.remove("hidden");
@@ -43,13 +68,13 @@ counterButton.addEventListener("click", () => {
     }
 });
 
-// Autoclick button functionality
 autoClickButton.addEventListener("click", () => {
     autoClickButton.classList.add("hidden");
     const autoClickInterval = setInterval(() => {
         clickCount++;
         counterButton.innerText = `Day ${clickCount}`;
-        
+        updateHeartRate();
+
         if (clickCount >= maxClicks) {
             clearInterval(autoClickInterval);
             counterButton.classList.add("hidden");
@@ -59,10 +84,15 @@ autoClickButton.addEventListener("click", () => {
                 alert("I knew you'd be too tired to actually click through all 730 days!");
             }, 500);
         }
-    }, 20); // Adjust speed of autoclicks if necessary
+    }, 20);
 });
 
-// Show slideshow on "View the Memories" button click
+frog.addEventListener("click", () => {
+    secretLink.classList.remove("hidden");
+    secretLink.click();
+    secretLink.classList.add("hidden");
+});
+
 viewMemoriesButton.addEventListener("click", () => {
     viewMemoriesButton.classList.add("hidden");
     slideshow.classList.remove("hidden");

@@ -7,6 +7,17 @@ body {
     align-items: center;
     height: 100vh;
     font-family: Arial, sans-serif;
+    position: relative;
+}
+
+#pageTitle {
+    position: fixed;
+    top: 20px;
+    font-size: 2em;
+    color: #ff69b4;
+    text-align: center;
+    width: 100%;
+    z-index: 3;
 }
 
 #counterButton {
@@ -120,7 +131,6 @@ body {
     }
 }
 
-/* New styles for the autoclick button */
 #autoClickButton {
     position: fixed;
     bottom: 20px;
@@ -134,4 +144,11 @@ body {
     cursor: pointer;
     z-index: 1;
     animation: button-pop 0.5s ease;
+}
+
+#frog {
+    position: absolute;
+    font-size: 2em;
+    cursor: pointer;
+    z-index: 2;
 }
